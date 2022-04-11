@@ -14,7 +14,7 @@ namespace CFB_Academia
 
         private static SQLiteConnection ConexaoBanco()
         {
-            conexao = new SQLiteConnection("Data Source=C:\\Users\\samue\\OneDrive\\Área de Trabalho\\DEV\\C#\\CFB\\CFB_Academia\\CFB_Academia\\banco");
+            conexao = new SQLiteConnection("Data Source=C:\\Users\\samue\\OneDrive\\Área de Trabalho\\CFB_Academia\\Sistema_Academias_cs\\App\\banco\\banco_academia.db");
             conexao.Open();
             return conexao;
         }
@@ -30,10 +30,34 @@ namespace CFB_Academia
                     cmd.CommandText = "SELECT * FROM tb_usuarios";
                     da = new SQLiteDataAdapter(cmd.CommandText, ConexaoBanco());
                     da.Fill(dt);
+                    ConexaoBanco().Close();
                     return dt;
                 }
             }catch (Exception ex)
             {
+                ConexaoBanco().Close();
+                throw ex;
+            }
+        }
+
+        public static DataTable consulta(string sql)
+        {
+            SQLiteDataAdapter da;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = ConexaoBanco().CreateCommand())
+                {
+                    cmd.CommandText = sql;
+                    da = new SQLiteDataAdapter(cmd.CommandText, ConexaoBanco());
+                    da.Fill(dt);
+                    ConexaoBanco().Close();
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                ConexaoBanco().Close();
                 throw ex;
             }
         }

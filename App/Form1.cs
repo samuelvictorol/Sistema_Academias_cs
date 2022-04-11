@@ -33,5 +33,28 @@ namespace CFB_Academia
         {
 
         }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja mesmo sair", "Academia c#", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void acesso_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pb_ledlogado_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
